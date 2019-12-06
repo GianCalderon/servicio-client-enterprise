@@ -1,4 +1,4 @@
-package com.springboot.clientEnterprise.document;
+package com.springboot.enterprise.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,34 +9,39 @@ public class Enterprise {
 	
 	@Id
 	private String id;
-	private String ruc;
+	private String tipoDoc;
+	private String numDoc;
 	private String name;
 	private String address;
 
-
-	public Enterprise(String ruc, String name, String address) {
+	public Enterprise() {
+		
+	}
+	public Enterprise(String tipoDoc, String numDoc, String name, String address) {
 		super();
-		this.ruc = ruc;
+		this.tipoDoc = tipoDoc;
+		this.numDoc = numDoc;
 		this.name = name;
 		this.address = address;
 	}
 	
-
-	public Enterprise() {
-		super();
-	}
-
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getRuc() {
-		return ruc;
+	public String getTipoDoc() {
+		return tipoDoc;
 	}
-	public void setRuc(String ruc) {
-		this.ruc = ruc;
+	public void setTipoDoc(String tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+	public String getNumDoc() {
+		return numDoc;
+	}
+	public void setNumDoc(String numDoc) {
+		this.numDoc = numDoc;
 	}
 	public String getName() {
 		return name;
@@ -50,7 +55,10 @@ public class Enterprise {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
 	
+
 	
 
 }

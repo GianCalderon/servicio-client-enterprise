@@ -1,8 +1,8 @@
-package com.springboot.clientEnterprise.repo;
+package com.springboot.enterprise.repo;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import com.springboot.clientEnterprise.document.Enterprise;
+import com.springboot.enterprise.document.Enterprise;
 
 public interface EnterpriseRepo extends ReactiveMongoRepository<Enterprise, String> {
 

@@ -1,6 +1,6 @@
-package com.springboot.clientEnterprise.service;
+package com.springboot.enterprise.service;
 
-import com.springboot.clientEnterprise.document.Enterprise;
+import com.springboot.enterprise.document.Enterprise;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

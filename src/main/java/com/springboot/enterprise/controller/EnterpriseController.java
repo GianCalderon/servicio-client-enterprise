@@ -1,4 +1,4 @@
-package com.springboot.clientEnterprise.controller;
+package com.springboot.enterprise.controller;
 
 import java.net.URI;
 
@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.clientEnterprise.document.Enterprise;
-import com.springboot.clientEnterprise.service.EnterpriseInterface;
-
+import com.springboot.enterprise.document.Enterprise;
+import com.springboot.enterprise.service.EnterpriseInterface;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

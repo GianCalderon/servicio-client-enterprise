@@ -1,10 +1,10 @@
-package com.springboot.clientEnterprise.service;
+package com.springboot.enterprise.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springboot.clientEnterprise.document.Enterprise;
-import com.springboot.clientEnterprise.repo.EnterpriseRepo;
+import com.springboot.enterprise.document.Enterprise;
+import com.springboot.enterprise.repo.EnterpriseRepo;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -35,8 +35,8 @@ public class EnterpriseImpl implements EnterpriseInterface {
 	public Mono<Enterprise> update(Enterprise enterprise, String id) {
 		
 		return repo.findById(id).flatMap(e -> {
-
-			e.setRuc(enterprise.getRuc());
+			
+			e.setNumDoc(enterprise.getNumDoc());
 			e.setName(enterprise.getName());
 			e.setAddress(enterprise.getAddress());
 			return repo.save(e);
