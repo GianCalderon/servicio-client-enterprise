@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.enterprise.controller.EnterpriseController;
 import com.springboot.enterprise.document.Enterprise;
+import com.springboot.enterprise.dto.EnterpriseDto;
 import com.springboot.enterprise.repo.EnterpriseRepo;
+import com.springboot.enterprise.util.UtilConvert;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,6 +22,9 @@ public class EnterpriseImpl implements EnterpriseInterface {
 	 
 	@Autowired
 	EnterpriseRepo repo;
+	
+	@Autowired
+	UtilConvert convert;
 	
 	
 	public Flux<Enterprise> findAll() {
@@ -54,5 +59,19 @@ public class EnterpriseImpl implements EnterpriseInterface {
 	public Mono<Void> delete(Enterprise enterprise) {
 		return repo.delete(enterprise);
 	}
+	
+	@Override
+	public Mono<Enterprise> saveDto(EnterpriseDto enterpriseDto) {
+		
+		return save(convert.convertEnterprise(enterpriseDto));
+	}
+
+	@Override
+	public Mono<Enterprise> nameSearch(String name) {
+		
+		return repo.findByName(name);
+	}
+
+
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.enterprise.document.Enterprise;
+import com.springboot.enterprise.dto.EnterpriseDto;
 import com.springboot.enterprise.service.EnterpriseInterface;
 
 import reactor.core.publisher.Flux;
@@ -36,7 +37,7 @@ public class EnterpriseController {
 	public Mono<ResponseEntity<Flux<Enterprise>>> toList() {
 
 		return Mono.just(ResponseEntity.ok()
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(service.findAll()));
 
 	}
@@ -45,20 +46,18 @@ public class EnterpriseController {
 	public Mono<ResponseEntity<Enterprise>> search(@PathVariable String id) {
 
 		return service.findById(id).map(e->ResponseEntity.ok()
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.contentType(MediaType.APPLICATION_JSON)
 				.body(e))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 
 	}
 
 	@PostMapping
-	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
+	public Mono<ResponseEntity<Enterprise>> save(@RequestBody EnterpriseDto enterpriseDto) {
 	
 
-		return service.save(enterprise).map(e->ResponseEntity
-				.created(URI.create("/api/enterprise".concat(e.getId())))
-				.contentType(MediaType.APPLICATION_JSON_UTF8)
-				.body(e));
+		return service.saveDto(enterpriseDto).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
+				.contentType(MediaType.APPLICATION_JSON).body(e));
 
 	}
 
@@ -67,7 +66,7 @@ public class EnterpriseController {
 
 		return service.update(enterprise, id).map(e->ResponseEntity
 						.created(URI.create("/api/enterprise".concat(e.getId())))
-						.contentType(MediaType.APPLICATION_JSON_UTF8)
+						.contentType(MediaType.APPLICATION_JSON)
 						.body(e))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 			
