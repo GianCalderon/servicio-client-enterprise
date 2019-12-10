@@ -2,6 +2,8 @@ package com.springboot.enterprise.controller;
 
 import java.net.URI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +27,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/enterprise")
 public class EnterpriseController {
 	
+  private static final Logger LOGGER = LoggerFactory.getLogger(EnterpriseController.class);
+
 	@Autowired
 	EnterpriseInterface service;
 	
