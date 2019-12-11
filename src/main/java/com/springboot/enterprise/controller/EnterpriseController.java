@@ -53,10 +53,10 @@ public class EnterpriseController {
 	}
 
 	@PostMapping
-	public Mono<ResponseEntity<Enterprise>> save(@RequestBody EnterpriseDto enterpriseDto) {
+	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
 	
 
-		return service.saveDto(enterpriseDto).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
+		return service.save(enterprise).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
 				.contentType(MediaType.APPLICATION_JSON).body(e));
 
 	}
@@ -82,5 +82,16 @@ public class EnterpriseController {
 
 		
 	}
+	
+	@PostMapping("/saveDto")
+	public Mono<ResponseEntity<Enterprise>> save(@RequestBody EnterpriseDto enterpriseDto) {
+	
+		LOGGER.info(enterpriseDto.toString());
+
+		return service.saveDto(enterpriseDto).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
+				.contentType(MediaType.APPLICATION_JSON).body(e));
+
+	}
+
 
 }

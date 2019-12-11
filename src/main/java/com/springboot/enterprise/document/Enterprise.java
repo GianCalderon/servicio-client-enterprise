@@ -19,19 +19,11 @@ public class Enterprise {
 	private String name;
 	private String address;
 	private List<String> idCuentas;
-	
-	public Enterprise(String tipoDoc, String numDoc, String name, String address) {
-	
-		this.tipoDoc = tipoDoc;
-		this.numDoc = numDoc;
-		this.name = name;
-		this.address = address;
-	
-	}
 
 	public Enterprise() {
 		
 	}
+
 
 	
 	

@@ -14,7 +14,9 @@ public class UtilConvert {
 	public Enterprise convertEnterprise(EnterpriseDto enterpriseDto) {
 
 		Enterprise enterprise = new Enterprise();
+		
 	    List<String> lista = new ArrayList<String>();
+	  
 	    lista.add(enterpriseDto.getIdCuenta());
 
 	    enterprise.setTipoDoc(enterpriseDto.getTipoDoc());
