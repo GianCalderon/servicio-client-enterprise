@@ -1,6 +1,8 @@
 package com.springboot.enterprise.document;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,7 +20,7 @@ public class Enterprise {
 	private String numDoc;
 	private String name;
 	private String address;
-	private List<String> idCuentas;
+	private List<Map<String,String>> idCuentas;
 
 	public Enterprise() {
 		

@@ -6,6 +6,7 @@ import lombok.Data;
 public class EnterpriseDto {
 
 	  private String idCuenta;
+	  private String nameAccount;
 	  private String tipoDoc;
 	  private String numDoc;
 	  private String name;

@@ -1,7 +1,9 @@
 package com.springboot.enterprise.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -12,12 +14,15 @@ import com.springboot.enterprise.dto.EnterpriseDto;
 public class UtilConvert {
 
 	public Enterprise convertEnterprise(EnterpriseDto enterpriseDto) {
-
+		
+		
+		Map<String,String> cuentaMap=new HashMap<String,String>();
 		Enterprise enterprise = new Enterprise();
 		
-	    List<String> lista = new ArrayList<String>();
-	  
-	    lista.add(enterpriseDto.getIdCuenta());
+		cuentaMap.put(enterpriseDto.getNameAccount(), enterpriseDto.getIdCuenta());
+	    List<Map<String,String>> lista = new ArrayList<Map<String,String>>();
+	    
+	    lista.add(cuentaMap);
 
 	    enterprise.setTipoDoc(enterpriseDto.getTipoDoc());
 	    enterprise.setNumDoc(enterpriseDto.getNumDoc());

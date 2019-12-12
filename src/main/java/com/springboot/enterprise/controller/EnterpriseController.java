@@ -86,7 +86,7 @@ public class EnterpriseController {
 	@PostMapping("/saveDto")
 	public Mono<ResponseEntity<Enterprise>> save(@RequestBody EnterpriseDto enterpriseDto) {
 	
-		LOGGER.info(enterpriseDto.toString());
+		LOGGER.info("EnterpriceController: "+enterpriseDto.toString());
 
 		return service.saveDto(enterpriseDto).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
 				.contentType(MediaType.APPLICATION_JSON).body(e));
