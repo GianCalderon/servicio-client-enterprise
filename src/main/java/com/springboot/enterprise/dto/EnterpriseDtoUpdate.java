@@ -1,9 +1,12 @@
 package com.springboot.enterprise.dto;
 
+import java.util.List;
+import java.util.Map;
+
 import lombok.Data;
 
 @Data
-public class EnterpriseDto {
+public class EnterpriseDtoUpdate {
 
 	private String idAccount;
 	private String nameAccount;	
@@ -11,6 +14,7 @@ public class EnterpriseDto {
 	private String numDoc;
 	private String name;
 	private String address;
+	private List<Map<String,String>> idCuentas;
 	
 
 }

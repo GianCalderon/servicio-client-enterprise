@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
+import com.springboot.enterprise.dto.EnterpriseDtoUpdate;
 import com.springboot.enterprise.service.EnterpriseInterface;
 
 import reactor.core.publisher.Flux;
@@ -52,19 +53,21 @@ public class EnterpriseController {
 
 	}
 
-	@PostMapping
-	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
-	
-
-		return service.save(enterprise).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
-				.contentType(MediaType.APPLICATION_JSON).body(e));
-
-	}
+//	@PostMapping
+//	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
+//	
+//		LOGGER.info("Empresa Recibida :--->"+enterprise.toString());
+//
+//		return service.save(enterprise).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
+//				.contentType(MediaType.APPLICATION_JSON).body(e));
+//
+//	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Enterprise>> update(@RequestBody Enterprise enterprise, @PathVariable String id) {
+	public Mono<ResponseEntity<Enterprise>> update(@RequestBody EnterpriseDtoUpdate enterpriseDtoUpdate, @PathVariable String id) {
 
-		return service.update(enterprise, id).map(e->ResponseEntity
+		LOGGER.info("Empresa Recibida para Actualizar :--->"+enterpriseDtoUpdate.toString());
+		return service.update(enterpriseDtoUpdate, id).map(e->ResponseEntity
 						.created(URI.create("/api/enterprise".concat(e.getId())))
 						.contentType(MediaType.APPLICATION_JSON)
 						.body(e))
@@ -83,10 +86,10 @@ public class EnterpriseController {
 		
 	}
 	
-	@PostMapping("/saveDto")
+	@PostMapping
 	public Mono<ResponseEntity<Enterprise>> save(@RequestBody EnterpriseDto enterpriseDto) {
 	
-		LOGGER.info("EnterpriceController: "+enterpriseDto.toString());
+		LOGGER.info("Empresa Recibida :--->"+enterpriseDto.toString());
 
 		return service.saveDto(enterpriseDto).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
 				.contentType(MediaType.APPLICATION_JSON).body(e));

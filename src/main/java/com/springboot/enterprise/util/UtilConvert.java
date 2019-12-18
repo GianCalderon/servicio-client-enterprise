@@ -1,6 +1,7 @@
 package com.springboot.enterprise.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class UtilConvert {
 		Map<String,String> cuentaMap=new HashMap<String,String>();
 		Enterprise enterprise = new Enterprise();
 		
-		cuentaMap.put(enterpriseDto.getNameAccount(), enterpriseDto.getIdCuenta());
+		cuentaMap.put(enterpriseDto.getIdAccount(),enterpriseDto.getNameAccount());
 	    List<Map<String,String>> lista = new ArrayList<Map<String,String>>();
 	    
 	    lista.add(cuentaMap);
@@ -28,6 +29,8 @@ public class UtilConvert {
 	    enterprise.setNumDoc(enterpriseDto.getNumDoc());
 	    enterprise.setName(enterpriseDto.getName()); 
 	    enterprise.setAddress(enterpriseDto.getAddress());
+	    enterprise.setCreateDate(new Date());
+	    enterprise.setUpdateDate(new Date());
 	    enterprise.setIdCuentas(lista);
 
 	    return enterprise;

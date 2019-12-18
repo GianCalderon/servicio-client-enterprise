@@ -23,19 +23,15 @@ public class Enterprise {
 	private String id;
 
 	@NotNull(message = "User's tipoDoc must not be null")
-	@NotEmpty(message = "tipoDoc may not be empty")
 	private String tipoDoc;
 
 	@NotNull(message = "User's numDoc must not be null")
-	@NotEmpty(message = "numDoc may not be empty")
 	private String numDoc;
 
 	@NotNull(message = "User's name must not be null")
-	@NotEmpty(message = "name may not be empty")
 	private String name;
 
 	@NotNull(message = "User's address must not be null")
-	@NotEmpty(message = "address may not be empty")
 	private String address;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
