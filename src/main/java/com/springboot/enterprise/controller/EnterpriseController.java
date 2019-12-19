@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
-import com.springboot.enterprise.dto.EnterpriseDtoUpdate;
 import com.springboot.enterprise.service.EnterpriseInterface;
 
 import reactor.core.publisher.Flux;
@@ -64,10 +63,11 @@ public class EnterpriseController {
 //	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Enterprise>> update(@RequestBody EnterpriseDtoUpdate enterpriseDtoUpdate, @PathVariable String id) {
+	public Mono<ResponseEntity<Enterprise>> update(@RequestBody EnterpriseDto enterpriseDto, @PathVariable String id) {
 
-		LOGGER.info("Empresa Recibida para Actualizar :--->"+enterpriseDtoUpdate.toString());
-		return service.update(enterpriseDtoUpdate, id).map(e->ResponseEntity
+		LOGGER.info("Empresa Recibida para Actualizar :--->"+enterpriseDto.toString());
+		
+		return service.update(enterpriseDto, id).map(e->ResponseEntity
 						.created(URI.create("/api/enterprise".concat(e.getId())))
 						.contentType(MediaType.APPLICATION_JSON)
 						.body(e))

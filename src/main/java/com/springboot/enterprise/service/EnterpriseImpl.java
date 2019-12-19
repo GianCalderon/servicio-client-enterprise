@@ -1,7 +1,5 @@
 package com.springboot.enterprise.service;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.springboot.enterprise.controller.EnterpriseController;
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
-import com.springboot.enterprise.dto.EnterpriseDtoUpdate;
 import com.springboot.enterprise.repo.EnterpriseRepo;
 import com.springboot.enterprise.util.UtilConvert;
 
@@ -46,20 +43,22 @@ public class EnterpriseImpl implements EnterpriseInterface {
 	}
 
 	@Override
-	public Mono<Enterprise> update(EnterpriseDtoUpdate enterpriseDtoUpdate, String id) {
+	public Mono<Enterprise> update(EnterpriseDto enterpriseDtoUpdate, String id) {
 		
-		return repo.findById(id).flatMap(e -> {
-			
-			e.setNumDoc(enterpriseDtoUpdate.getNumDoc());
-			e.setName(enterpriseDtoUpdate.getName());
-			e.setAddress(enterpriseDtoUpdate.getAddress());
-			e.setUpdateDate(new Date());
-			e.setIdCuentas(enterpriseDtoUpdate.getIdCuentas());
-			
-			e.setUpdateDate(new Date());
-			return repo.save(e);
-
-		});
+//		return repo.findById(id).flatMap(e -> {
+//			
+//			e.setNumDoc(enterpriseDtoUpdate.getNumDoc());
+//			e.setName(enterpriseDtoUpdate.getName());
+//			e.setAddress(enterpriseDtoUpdate.getAddress());
+//			e.setUpdateDate(new Date());
+//			e.setIdCuentas(enterpriseDtoUpdate.getIdCuentas());
+//			
+//			e.setUpdateDate(new Date());
+//			return repo.save(e);
+//
+//		});
+		
+		return null;
 	}
 
 	@Override

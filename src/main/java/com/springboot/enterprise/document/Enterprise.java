@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,6 +27,7 @@ public class Enterprise {
 	private String tipoDoc;
 
 	@NotNull(message = "User's numDoc must not be null")
+	@Indexed(unique = true)
 	private String numDoc;
 
 	@NotNull(message = "User's name must not be null")
@@ -40,7 +42,7 @@ public class Enterprise {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updateDate;
 
-	private List<Map<String, String>> idCuentas;
+	private List<Cuenta> idCuentas;
 
 	public Enterprise() {
 
