@@ -21,5 +21,7 @@ public interface EnterpriseInterface  {
   public Mono<Enterprise> saveDto(EnterpriseDto personalDto);
   
   public Mono<Enterprise> nameSearch(String name);
+  
+  public Mono<Enterprise> findByNumDoc(String numDoc);
 	
 }

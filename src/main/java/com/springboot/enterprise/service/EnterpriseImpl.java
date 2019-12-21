@@ -93,6 +93,12 @@ public class EnterpriseImpl implements EnterpriseInterface {
 //
 //		});
 //	}
+	
+	 @Override
+	  public Mono<Enterprise> findByNumDoc(String numDoc) {
+
+	    return repo.findByNumDoc(numDoc);
+	  }
 
 
 

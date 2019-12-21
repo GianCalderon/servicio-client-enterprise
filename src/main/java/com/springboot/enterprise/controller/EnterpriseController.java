@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.enterprise.document.Cuenta;
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
 import com.springboot.enterprise.service.EnterpriseInterface;
@@ -95,6 +96,17 @@ public class EnterpriseController {
 				.contentType(MediaType.APPLICATION_JSON).body(e));
 
 	}
+	
+	  @GetMapping("/valid/{ruc}")
+	  public Flux<Cuenta> valid(@PathVariable String dni) {
+	   
+	    return service.findByNumDoc(dni).flatMapMany(p ->{ 
+
+	    	return Flux.fromIterable(p.getIdCuentas());
+	    		
+	    });	
+	    	
+	  }
 
 
 }
