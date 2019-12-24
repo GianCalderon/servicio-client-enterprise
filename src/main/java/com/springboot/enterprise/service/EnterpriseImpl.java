@@ -1,11 +1,16 @@
 package com.springboot.enterprise.service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.enterprise.controller.EnterpriseController;
+import com.springboot.enterprise.document.Account;
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
 import com.springboot.enterprise.repo.EnterpriseRepo;
@@ -36,29 +41,45 @@ public class EnterpriseImpl implements EnterpriseInterface {
 		
 		return repo.findById(id);
 	}
+	
 	@Override
 	public Mono<Enterprise> save(Enterprise enterprise) {
 
+		enterprise.setCreateDate(new Date());
+		enterprise.setUpdateDate(new Date());
+		enterprise.setListAccount(new ArrayList<Account>());
+		
 		return repo.save(enterprise);
+
 	}
 
 	@Override
-	public Mono<Enterprise> update(EnterpriseDto enterpriseDtoUpdate, String id) {
+	public Mono<Enterprise> update(EnterpriseDto enterpriseDto, String ruc) {
 		
-//		return repo.findById(id).flatMap(e -> {
-//			
-//			e.setNumDoc(enterpriseDtoUpdate.getNumDoc());
-//			e.setName(enterpriseDtoUpdate.getName());
-//			e.setAddress(enterpriseDtoUpdate.getAddress());
-//			e.setUpdateDate(new Date());
-//			e.setIdCuentas(enterpriseDtoUpdate.getIdCuentas());
-//			
-//			e.setUpdateDate(new Date());
-//			return repo.save(e);
-//
-//		});
+	    return repo.findByNumDoc(ruc).flatMap(enterprise -> {
+	      	
+	        List<Account> list = enterprise.getListAccount();
+	        
+	        Account account = new Account();
+	        
+	        account.setIdAccount(enterpriseDto.getIdAccount());
+	        account.setNumberAccount(enterpriseDto.getNumberAccount());
+	        account.setNameAccount(enterpriseDto.getNameAccount());
+
+	        list.add(account);
+
+	        enterprise.setTipoDoc(enterpriseDto.getTipoDoc());
+	        enterprise.setNumDoc(enterpriseDto.getNumDoc());
+	        enterprise.setName(enterpriseDto.getName());
+	        enterprise.setAddress(enterpriseDto.getAddress());
+	        enterprise.setUpdateDate(new Date());
+	        enterprise.setListAccount(list);
+	        
+	        return repo.save(enterprise);
+	    
+	      });
 		
-		return null;
+	
 	}
 
 	@Override

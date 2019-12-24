@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.springboot.enterprise.document.Cuenta;
+import com.springboot.enterprise.document.Account;
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
 
@@ -16,12 +16,14 @@ public class UtilConvert {
 	public Enterprise convertEnterprise(EnterpriseDto enterpriseDto) {
 		
 		
-		Cuenta cuenta = new Cuenta();
-        cuenta.setNameAccount(enterpriseDto.getNameAccount());
-        cuenta.setNumAccount(enterpriseDto.getNumberAccount());
+		Account account = new Account();
+		
+		account.setIdAccount(enterpriseDto.getIdAccount());
+        account.setNameAccount(enterpriseDto.getNameAccount());
+        account.setNumberAccount(enterpriseDto.getNumberAccount());
         
-        List<Cuenta> lista = new ArrayList<>();
-        lista.add(cuenta);
+        List<Account> lista = new ArrayList<>();
+        lista.add(account);
         
         Enterprise enterprise = new Enterprise();
 
@@ -31,8 +33,8 @@ public class UtilConvert {
 	    enterprise.setAddress(enterpriseDto.getAddress());
 	    enterprise.setCreateDate(new Date());
 	    enterprise.setUpdateDate(new Date());
-	    enterprise.setIdCuentas(lista);
+	    enterprise.setListAccount(lista);
 
-	    return 	null;
+	    return 	enterprise;
 	  }
 }

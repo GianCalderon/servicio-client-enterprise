@@ -42,7 +42,7 @@ public class Enterprise {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updateDate;
 
-	private List<Cuenta> idCuentas;
+	private List<Account> listAccount;
 
 	public Enterprise() {
 

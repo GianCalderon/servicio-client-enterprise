@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.enterprise.document.Cuenta;
+import com.springboot.enterprise.document.Account;
 import com.springboot.enterprise.document.Enterprise;
 import com.springboot.enterprise.dto.EnterpriseDto;
 import com.springboot.enterprise.service.EnterpriseInterface;
@@ -53,15 +53,13 @@ public class EnterpriseController {
 
 	}
 
-//	@PostMapping
-//	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
-//	
-//		LOGGER.info("Empresa Recibida :--->"+enterprise.toString());
-//
-//		return service.save(enterprise).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
-//				.contentType(MediaType.APPLICATION_JSON).body(e));
-//
-//	}
+	@PostMapping
+	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
+
+		return service.save(enterprise).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
+				.contentType(MediaType.APPLICATION_JSON).body(e));
+
+	}
 
 	@PutMapping("/{id}")
 	public Mono<ResponseEntity<Enterprise>> update(@RequestBody EnterpriseDto enterpriseDto, @PathVariable String id) {
@@ -87,8 +85,8 @@ public class EnterpriseController {
 		
 	}
 	
-	@PostMapping
-	public Mono<ResponseEntity<Enterprise>> save(@RequestBody EnterpriseDto enterpriseDto) {
+	@PostMapping("/saveEnterprise")
+	public Mono<ResponseEntity<Enterprise>> saveDto(@RequestBody EnterpriseDto enterpriseDto) {
 	
 		LOGGER.info("Empresa Recibida :--->"+enterpriseDto.toString());
 
@@ -97,12 +95,21 @@ public class EnterpriseController {
 
 	}
 	
-	  @GetMapping("/valid/{ruc}")
-	  public Flux<Cuenta> valid(@PathVariable String dni) {
-	   
-	    return service.findByNumDoc(dni).flatMapMany(p ->{ 
+	  @GetMapping("/doc/{ruc}")
+	  public Mono<ResponseEntity<Enterprise>> searchRuc(@PathVariable String ruc) {
 
-	    	return Flux.fromIterable(p.getIdCuentas());
+	    return service.findByNumDoc(ruc).map(p -> ResponseEntity.ok()
+	      .contentType(MediaType.APPLICATION_JSON).body(p))
+	      .defaultIfEmpty(ResponseEntity.notFound().build());
+
+	  }
+	
+	  @GetMapping("/valid/{ruc}")
+	  public Flux<Account> valid(@PathVariable String dni) {
+	   
+	    return service.findByNumDoc(dni).flatMapMany(cuentas ->{ 
+
+	    	return Flux.fromIterable(cuentas.getListAccount());
 	    		
 	    });	
 	    	

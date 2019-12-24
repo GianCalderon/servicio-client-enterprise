@@ -10,11 +10,11 @@ import reactor.core.publisher.Mono;
 public interface EnterpriseRepo extends ReactiveMongoRepository<Enterprise, String> {
 	
 	  public Mono<Enterprise> findByName(String name);
-
-	  @Query("{'nombre': ?0 }")
-	  public Mono<Enterprise> nameSearch(String name);
+	  
+//	  public Mono<Enterprise> findByNumDoc(String numDoc);
 	  
 	  @Query("{'numDoc': ?0 }")
 	  public Mono<Enterprise> findByNumDoc(String numDoc);
-
+	  
+	 
 }
