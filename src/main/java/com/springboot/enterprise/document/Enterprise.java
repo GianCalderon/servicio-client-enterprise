@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-@Document(collection = "client-Enterprise")
+@Document(collection = "Cliente-Empresarial")
 public class Enterprise {
 
 	@Id

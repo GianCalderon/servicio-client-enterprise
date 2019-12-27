@@ -100,20 +100,7 @@ public class EnterpriseImpl implements EnterpriseInterface {
 		
 		return repo.findByName(name);
 	}
-	
-//	@Override
-//	public Mono<Enterprise> updateDto(EnterpriseDto enterpriseDto, String id) {
-//		
-//		return repo.findById(id).flatMap(e -> {
-//			
-//			e.setNumDoc(enterprise.getNumDoc());
-//			e.setName(enterprise.getName());
-//			e.setAddress(enterprise.getAddress());
-//			e.setUpdateDate(new Date());
-//			return repo.save(e);
-//
-//		});
-//	}
+
 	
 	 @Override
 	  public Mono<Enterprise> findByNumDoc(String numDoc) {
