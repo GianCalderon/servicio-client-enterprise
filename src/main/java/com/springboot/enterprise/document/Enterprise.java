@@ -42,8 +42,6 @@ public class Enterprise {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updateDate;
 
-	private List<Account> listAccount;
-
 	public Enterprise() {
 
 	}

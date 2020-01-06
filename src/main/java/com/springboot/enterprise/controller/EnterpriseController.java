@@ -55,6 +55,8 @@ public class EnterpriseController {
 
 	@PostMapping
 	public Mono<ResponseEntity<Enterprise>> save(@RequestBody Enterprise enterprise) {
+		
+		LOGGER.info(enterprise.toString());
 
 		return service.save(enterprise).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
 				.contentType(MediaType.APPLICATION_JSON).body(e));
@@ -62,11 +64,11 @@ public class EnterpriseController {
 	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Enterprise>> update(@RequestBody EnterpriseDto enterpriseDto, @PathVariable String id) {
+	public Mono<ResponseEntity<Enterprise>> update(@RequestBody Enterprise enterprise, @PathVariable String id) {
 
-		LOGGER.info("Empresa Recibida para Actualizar :--->"+enterpriseDto.toString());
+		LOGGER.info("Empresa Recibida para Actualizar :--->"+enterprise.toString());
 		
-		return service.update(enterpriseDto, id).map(e->ResponseEntity
+		return service.update(enterprise, id).map(e->ResponseEntity
 						.created(URI.create("/api/enterprise".concat(e.getId())))
 						.contentType(MediaType.APPLICATION_JSON)
 						.body(e))
@@ -85,35 +87,17 @@ public class EnterpriseController {
 		
 	}
 	
-	@PostMapping("/saveEnterprise")
-	public Mono<ResponseEntity<Enterprise>> saveDto(@RequestBody EnterpriseDto enterpriseDto) {
-	
-		LOGGER.info("Empresa Recibida :--->"+enterpriseDto.toString());
 
-		return service.saveDto(enterpriseDto).map(e->ResponseEntity.created(URI.create("/api/enterprise"))
-				.contentType(MediaType.APPLICATION_JSON).body(e));
-
-	}
 	
-	  @GetMapping("/doc/{ruc}")
+	  @GetMapping("/numDoc/{ruc}")
 	  public Mono<ResponseEntity<Enterprise>> searchRuc(@PathVariable String ruc) {
 
-	    return service.findByNumDoc(ruc).map(p -> ResponseEntity.ok()
+	    return service.findByRuc(ruc).map(p -> ResponseEntity.ok()
 	      .contentType(MediaType.APPLICATION_JSON).body(p))
 	      .defaultIfEmpty(ResponseEntity.notFound().build());
 
 	  }
 	
-	  @GetMapping("/valid/{ruc}")
-	  public Flux<Account> valid(@PathVariable String dni) {
-	   
-	    return service.findByNumDoc(dni).flatMapMany(cuentas ->{ 
-
-	    	return Flux.fromIterable(cuentas.getListAccount());
-	    		
-	    });	
-	    	
-	  }
 
 
 }

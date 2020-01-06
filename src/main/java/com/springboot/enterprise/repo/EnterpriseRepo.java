@@ -11,10 +11,11 @@ public interface EnterpriseRepo extends ReactiveMongoRepository<Enterprise, Stri
 	
 	  public Mono<Enterprise> findByName(String name);
 	  
-//	  public Mono<Enterprise> findByNumDoc(String numDoc);
-	  
 	  @Query("{'numDoc': ?0 }")
-	  public Mono<Enterprise> findByNumDoc(String numDoc);
+	  public Mono<Enterprise> findByRuc(String ruc);
 	  
+//	  @Query("{'numDoc': ?0 }")
+//	  public Mono<Enterprise> findByNumDoc(String numDoc);
+  
 	 
 }
